@@ -27,7 +27,40 @@
         android:id="@+id/button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
         android:onClick="click"
-        android:textSize="24dp" />
+        android:textSize="24dp"
+        android:layout_below="@+id/radioGroup" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/editText">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Black Tea"
+            android:id="@+id/blackTeaRadioButton"
+            android:checked="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green Tea"
+            android:id="@+id/greenTeaRadioButton"
+            android:layout_gravity="center_horizontal"
+            android:checked="false" />
+    </RadioGroup>
 </RelativeLayout>
