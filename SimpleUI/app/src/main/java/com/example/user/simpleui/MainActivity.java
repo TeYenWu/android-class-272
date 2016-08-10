@@ -3,6 +3,7 @@ package com.example.user.simpleui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -10,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -51,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 {
                     drink = "Green Tea";
                 }
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Order order = (Order)parent.getAdapter().getItem(position);
+                Toast.makeText(MainActivity.this, order.note, Toast.LENGTH_LONG).show();
             }
         });
 
