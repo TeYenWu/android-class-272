@@ -90,9 +90,10 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
 
         DrinkOrderDialog dialog = DrinkOrderDialog.newInstance("","");
 
-        ft.replace(R.id.root, dialog);
-
-        ft.commit();
+//        ft.replace(R.id.root, dialog);
+//
+//        ft.commit();
+        dialog.show(ft, "DrinkOrderDialog");
     }
 
     @Override
