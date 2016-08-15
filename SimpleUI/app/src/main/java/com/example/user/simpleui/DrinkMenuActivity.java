@@ -28,6 +28,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
 
     int total = 0;
     List<Drink> drinkList = new ArrayList<>();
+    List<DrinkOrder> drinkOrderList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +134,19 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onDrinkOrderResult(DrinkOrder drinkOrder) {
+        drinkOrderList.add(drinkOrder);
+        updateTotalTextView();
+    }
 
+    private void updateTotalTextView()
+    {
+        int total = 0;
+        for (DrinkOrder drinkOrder : drinkOrderList)
+        {
+            total += drinkOrder.lNumber * drinkOrder.drink.lPrice + drinkOrder.mNumber * drinkOrder.drink.mPrice;
+        }
+
+        totalTextView.setText(String.valueOf(total));
     }
 }
