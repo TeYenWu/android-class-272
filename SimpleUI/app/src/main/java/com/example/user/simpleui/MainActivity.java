@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     String drink = "Black Tea";
 
+    ArrayList<DrinkOrder> drinkOrderList = new ArrayList<>();
     List<Order> data = new ArrayList<>();
 
     @Override
@@ -119,16 +120,19 @@ public class MainActivity extends AppCompatActivity {
         Order order = new Order();
 
         order.note = text;
-        order.drink = drink;
+        order.drinkOrderList = drinkOrderList;
         order.storeInfo = (String)spinner.getSelectedItem();
 
         data.add(order);
+
+        drinkOrderList = new ArrayList<>();
         setupListView();
     }
 
     public void goToMenu(View view)
     {
         Intent intent = new Intent();
+        intent.putExtra("result", drinkOrderList);
         intent.setClass(this, DrinkMenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_DRINK_MENU_ACTIVITY);
     }
@@ -140,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
         {
             if(resultCode == RESULT_OK)
             {
-                String result = data.getStringExtra("result");
-                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+                drinkOrderList = data.getParcelableArrayListExtra("result");
+//                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
             }
         }
     }
