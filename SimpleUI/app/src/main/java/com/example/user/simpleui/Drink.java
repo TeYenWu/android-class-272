@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.parse.Parse;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -17,7 +18,7 @@ public class Drink extends ParseObject implements Parcelable {
     static final String NAME_COL = "name";
     static final String MPRICE_COL = "mPrice";
     static final String LPRICE_COL = "lPrice";
-    int imageId;
+    static final String IMAGE_COL = "image";
 
     @Override
     public int describeContents() {
@@ -32,7 +33,6 @@ public class Drink extends ParseObject implements Parcelable {
             dest.writeString(this.getName());
             dest.writeInt(this.getmPrice());
             dest.writeInt(this.getlPrice());
-            dest.writeInt(this.imageId);
         }
         else
         {
@@ -49,7 +49,6 @@ public class Drink extends ParseObject implements Parcelable {
         this.setName(in.readString());
         this.setmPrice(in.readInt());
         this.setlPrice(in.readInt());
-        this.imageId = in.readInt();
     }
 
     public static final Parcelable.Creator<Drink> CREATOR = new Parcelable.Creator<Drink>() {
@@ -96,6 +95,8 @@ public class Drink extends ParseObject implements Parcelable {
     public void setlPrice(int lPrice) {
         this.put(LPRICE_COL, lPrice);
     }
+
+    public ParseFile getImage(){return getParseFile(IMAGE_COL);}
 
     public static ParseQuery<Drink> getQuery()
     {
