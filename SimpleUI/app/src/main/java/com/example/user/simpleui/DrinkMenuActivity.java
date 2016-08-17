@@ -13,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,22 +58,32 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
             }
         });
 
-        setupDrinkMenu();
+//        setupDrinkMenu();
 
         Log.d("DEBUG", "DrinkMenuActivity OnCreate");
     }
 
     private void setData()
     {
-        for (int i = 0; i < names.length ; i++)
-        {
-            Drink drink = new Drink();
-            drink.name = names[i];
-            drink.lPrice = lPrices[i];
-            drink.mPrice = mPrices[i];
-            drink.imageId = imageIds[i];
-            drinkList.add(drink);
-        }
+//        for (int i = 0; i < names.length ; i++)
+//        {
+//            Drink drink = new Drink();
+//            drink.name = names[i];
+//            drink.lPrice = lPrices[i];
+//            drink.mPrice = mPrices[i];
+//            drink.imageId = imageIds[i];
+//            drinkList.add(drink);
+//        }
+        Drink.getQuery().findInBackground(new FindCallback<Drink>() {
+            @Override
+            public void done(List<Drink> objects, ParseException e) {
+                if(e==null)
+                {
+                    drinkList = objects;
+                    setupDrinkMenu();
+                }
+            }
+        });
     }
 
     private void setupDrinkMenu()
@@ -93,7 +106,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
         DrinkOrder order = null;
         for (DrinkOrder drinkOrder : drinkOrderList)
         {
-            if (drinkOrder.drink.name.equals(drink.name))
+            if (drinkOrder.drink.getObjectId().equals(drink.getObjectId()))
             {
                 order = drinkOrder;
                 break;
@@ -157,7 +170,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
 
         for (int i = 0; i < drinkOrderList.size() ; i++)
         {
-            if(drinkOrderList.get(i).drink.name.equals(drinkOrder.drink.name))
+            if(drinkOrderList.get(i).drink.getObjectId().equals(drinkOrder.drink.getObjectId()))
             {
                 drinkOrderList.set(i, drinkOrder);
                 flag = true;
@@ -174,7 +187,7 @@ public class DrinkMenuActivity extends AppCompatActivity implements DrinkOrderDi
         int total = 0;
         for (DrinkOrder drinkOrder : drinkOrderList)
         {
-            total += drinkOrder.lNumber * drinkOrder.drink.lPrice + drinkOrder.mNumber * drinkOrder.drink.mPrice;
+            total += drinkOrder.lNumber * drinkOrder.drink.getlPrice() + drinkOrder.mNumber * drinkOrder.drink.getmPrice();
         }
 
         totalTextView.setText(String.valueOf(total));

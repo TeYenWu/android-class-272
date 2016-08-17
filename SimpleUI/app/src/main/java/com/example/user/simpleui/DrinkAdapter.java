@@ -59,9 +59,9 @@ public class DrinkAdapter extends BaseAdapter {
         }
 
         Drink drink = drinkList.get(position);
-        holder.drinkNameTextView.setText(drink.name);
-        holder.mPriceTextView.setText(String.valueOf(drink.mPrice));
-        holder.lPriceTextView.setText(String.valueOf(drink.lPrice));
+        holder.drinkNameTextView.setText(drink.getName());
+        holder.mPriceTextView.setText(String.valueOf(drink.getmPrice()));
+        holder.lPriceTextView.setText(String.valueOf(drink.getlPrice()));
         holder.imageView.setImageResource(drink.imageId);
         return convertView;
     }
