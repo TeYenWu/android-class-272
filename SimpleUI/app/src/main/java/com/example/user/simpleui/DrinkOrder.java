@@ -24,8 +24,12 @@ public class DrinkOrder extends ParseObject implements Parcelable {
 
     public DrinkOrder(Drink drink)
     {
+        super();
         this.setDrink(drink);
     }
+
+    public DrinkOrder()
+    {super();}
 
     @Override
     public int describeContents() {
@@ -53,6 +57,7 @@ public class DrinkOrder extends ParseObject implements Parcelable {
     }
 
     protected DrinkOrder(Parcel in) {
+        super();
         this.setDrink((Drink)in.readParcelable(Drink.class.getClassLoader()));
         this.setlNumber(in.readInt());
         this.setmNumber(in.readInt());

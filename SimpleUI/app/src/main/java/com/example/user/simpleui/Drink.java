@@ -43,9 +43,11 @@ public class Drink extends ParseObject implements Parcelable {
     }
 
     public Drink() {
+        super();
     }
 
     protected Drink(Parcel in) {
+        super();
         this.setName(in.readString());
         this.setmPrice(in.readInt());
         this.setlPrice(in.readInt());
