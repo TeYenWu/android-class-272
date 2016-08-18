@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Order order = (Order) parent.getAdapter().getItem(position);
+                goToDetail(order);
 //                Toast.makeText(MainActivity.this, order.note, Toast.LENGTH_LONG).show();
             }
         });
@@ -110,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
         Order.getOrdersFromLocalThenRemote(new FindCallback<Order>() {
             @Override
             public void done(List<Order> objects, ParseException e) {
-                if(e==null)
-                {
+                if (e == null) {
                     orderList = objects;
                     setupListView();
                 }
@@ -208,6 +208,14 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("result", drinkOrderList);
         intent.setClass(this, DrinkMenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_DRINK_MENU_ACTIVITY);
+    }
+
+    public void goToDetail(Order order)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("order", order);
+        intent.setClass(this, OrderDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
