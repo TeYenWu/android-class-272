@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupOrderHistory()
     {
-        Order.getQuery().findInBackground(new FindCallback<Order>() {
+        Order.getOrdersFromLocalThenRemote(new FindCallback<Order>() {
             @Override
             public void done(List<Order> objects, ParseException e) {
                 if(e==null)
@@ -189,13 +189,14 @@ public class MainActivity extends AppCompatActivity {
 //        Gson gson = new Gson();
 //        String orderData = gson.toJson(order);
 //        Utils.writeFile(this, "history", orderData + '\n');
-        order.saveInBackground(new SaveCallback() {
+        order.saveEventually(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if(e!=null)
                     Toast.makeText(MainActivity.this, "Order Failed", Toast.LENGTH_LONG).show();
             }
         });
+        order.pinInBackground("Order");
 
         drinkOrderList = new ArrayList<>();
         setupListView();
