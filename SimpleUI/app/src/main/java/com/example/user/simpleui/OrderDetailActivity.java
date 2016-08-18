@@ -34,28 +34,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
         drinkOrderResultsTextView.setText(resultText);
 
-        final Handler handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                latlngTextView.setText("123,456");
-                return false;
-            }
-        });
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-//                    latlngTextView.setText("123,456");
-                    handler.sendMessage(new Message());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
+        (new GeoCodingTask()).execute("");
     }
 
 }
