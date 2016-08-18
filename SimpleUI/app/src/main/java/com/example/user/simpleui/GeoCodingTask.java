@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 public class GeoCodingTask extends AsyncTask<String, Void, double[]>{
     @Override
     protected double[] doInBackground(String... params) {
+//        params[0]
         return new double[0];
     }
 
